@@ -16,6 +16,9 @@
         "email": "feedback@plurid.com",
         "url": "https://github.com/plurid/enhanced-grpc/issues"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "files": [
         "distribution/"
     ],
