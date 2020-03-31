@@ -17,26 +17,31 @@ export const generateClient = (
         url,
     } = options;
 
-    const packageDefinition = protoLoader.loadSync(
-        protocolBuffers,
-        {
-            keepCase: true,
-            longs: String,
-            enums: String,
-            defaults: true,
-            oneofs: true,
-            includeDirs: protocolBuffersDirectories,
-        },
-    );
+    try {
+        const packageDefinition = protoLoader.loadSync(
+            protocolBuffers,
+            {
+                keepCase: true,
+                longs: String,
+                enums: String,
+                defaults: true,
+                oneofs: true,
+                includeDirs: protocolBuffersDirectories,
+            },
+        );
 
-    const grpcService = grpc.loadPackageDefinition(packageDefinition)[service];
+        const grpcService = grpc.loadPackageDefinition(packageDefinition)[service];
 
-    const client = new (grpcService as any)(
-        url,
-        grpc.credentials.createInsecure(),
-    );
+        const client = new (grpcService as any)(
+            url,
+            grpc.credentials.createInsecure(),
+        );
 
-    return client;
+        return client;
+    } catch (error) {
+        console.log(`gRPC Client could not be reached at: ${url}`);
+        return;
+    }
 }
 
 
