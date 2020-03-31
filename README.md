@@ -18,7 +18,7 @@ gRPC Utilities and Enhancements
 ## Packages
 
 <a target="_blank" href="https://www.npmjs.com/package/@plurid/enhanced-grpc">
-    <img src="https://img.shields.io/npm/v/@plurid/generate-plurid-app.svg?logo=npm&colorB=1380C3&style=for-the-badge" alt="Version">
+    <img src="https://img.shields.io/npm/v/@plurid/enhanced-grpc.svg?logo=npm&colorB=1380C3&style=for-the-badge" alt="Version">
 </a>
 
 [@plurid/enhanced-grpc][enhanced-grpc] • `NodeJS` package
