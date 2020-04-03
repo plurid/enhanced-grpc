@@ -45,16 +45,16 @@ export const generateClient = (
 }
 
 
-export const clientCall = async <T>(
+export const clientCall = async <R, D>(
     client: any,
     name: string,
-    data: T,
-): Promise<any> => {
-    const response: any = await new Promise(
+    data: D,
+): Promise<R> => {
+    const response = await new Promise<R>(
         (resolve, reject) => {
             const callback = (
                 err: any,
-                response: any,
+                response: R,
             ) => {
                 if (err) {
                     reject();
