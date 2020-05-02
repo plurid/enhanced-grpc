@@ -73,22 +73,18 @@ export const clientCall = async <R, D>(
                 return;
             }
 
-            try {
-                const callback = (
-                    err: any,
-                    response: R,
-                ) => {
-                    if (err) {
-                        reject();
-                    }
-
-                    resolve(response);
+            const callback = (
+                error: any,
+                response: R,
+            ) => {
+                if (error) {
+                    reject(error);
                 }
 
-                (client as any)[name](data, callback);
-            } catch (error) {
-                throw error;
+                resolve(response);
             }
+
+            (client as any)[name](data, callback);
         }
     );
 
