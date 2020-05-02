@@ -1,6 +1,6 @@
 {
     "name": "@plurid/enhanced-grpc",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "gRPC Utilities and Enhancements",
     "keywords": [
         "enhanced",
