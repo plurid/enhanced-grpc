@@ -31,14 +31,20 @@ export const generateClient = (
             },
         );
 
-        const grpcService = grpc.loadPackageDefinition(packageDefinition)[service];
+        const loadedPackageDefinition = grpc.loadPackageDefinition(packageDefinition);
 
-        const client = new (grpcService as any)(
-            url,
-            grpc.credentials.createInsecure(),
-        );
+        const grpcServiceClient = loadedPackageDefinition[service];
 
-        return client;
+        if (typeof grpcServiceClient === 'function') {
+            const client = new grpcServiceClient(
+                url,
+                grpc.credentials.createInsecure(),
+            );
+
+            return client;
+        }
+
+        return;
     } catch (error) {
         if (options.quiet) {
             return;
@@ -56,7 +62,7 @@ export const generateClient = (
 
 
 export const clientCall = async <R, D>(
-    client: any,
+    client: grpc.Client,
     name: string,
     data: D,
 ): Promise<R> => {
@@ -73,7 +79,7 @@ export const clientCall = async <R, D>(
                 resolve(response);
             }
 
-            client[name](data, callback);
+            (client as any)[name](data, callback);
         }
     );
 
@@ -89,7 +95,7 @@ export const clientCall = async <R, D>(
  * @param data
  */
 export const tryClientCall = async <R, D>(
-    client: any,
+    client: grpc.Client,
     name: string,
     data: D,
 ): Promise<ClientCallResponse<R>> => {
