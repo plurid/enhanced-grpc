@@ -62,12 +62,17 @@ export const generateClient = (
 
 
 export const clientCall = async <R, D>(
-    client: grpc.Client,
+    client: grpc.Client | undefined,
     name: string,
     data: D,
 ): Promise<R> => {
     const response = await new Promise<R>(
         (resolve, reject) => {
+            if (!client) {
+                reject();
+                return;
+            }
+
             const callback = (
                 err: any,
                 response: R,
@@ -95,7 +100,7 @@ export const clientCall = async <R, D>(
  * @param data
  */
 export const tryClientCall = async <R, D>(
-    client: grpc.Client,
+    client: grpc.Client | undefined,
     name: string,
     data: D,
 ): Promise<ClientCallResponse<R>> => {
