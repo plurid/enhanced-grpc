@@ -3,6 +3,7 @@ import * as protoLoader from '@grpc/proto-loader';
 
 import {
     ClientOptions,
+    ClientCallResponse,
 } from '../data/interfaces';
 
 
@@ -39,7 +40,16 @@ export const generateClient = (
 
         return client;
     } catch (error) {
-        console.log(`gRPC Client could not be reached at: ${url}`);
+        if (options.quiet) {
+            return;
+        }
+
+        if (options.debug) {
+            console.log(`gRPC Client could not be reached at: ${url}`, error);
+        } else {
+            console.log(`gRPC Client could not be reached at: ${url}`);
+        }
+
         return;
     }
 }
@@ -68,4 +78,36 @@ export const clientCall = async <R, D>(
     );
 
     return response;
+}
+
+
+/**
+ * Attempt to call on the `client` the `named` function with the passed `data`.
+ *
+ * @param client
+ * @param name
+ * @param data
+ */
+export const tryClientCall = async <R, D>(
+    client: any,
+    name: string,
+    data: D,
+): Promise<ClientCallResponse<R>> => {
+    try {
+        const response = await clientCall<R, D>(
+            client,
+            name,
+            data,
+        );
+
+        return {
+            status: true,
+            response,
+        };
+    } catch (error) {
+        return {
+            status: false,
+            error,
+        };
+    }
 }
