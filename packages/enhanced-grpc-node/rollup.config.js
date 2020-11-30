@@ -10,7 +10,7 @@ import pkg from './package.json';
 
 const plugins = [
     replace({
-        'process.env.MODE_ENV': JSON.stringify(process.env.MODE_ENV),
+        'process.env.ENV_MODE': JSON.stringify(process.env.ENV_MODE),
     }),
     depsExternal(),
     resolve({

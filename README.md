@@ -1,6 +1,6 @@
 <p align="center">
     <a target="_blank" href="https://github.com/plurid/enhanced-grpc/blob/master/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg?colorB=1380C3&style=for-the-badge" alt="License: MIT">
+        <img src="https://img.shields.io/badge/license-DEL-blue.svg?colorB=1380C3&style=for-the-badge" alt="License: DEL">
     </a>
 </p>
 
@@ -10,8 +10,18 @@
 </h1>
 
 
+<h3 align="center">
+    gRPC Utilities and Enhancements
+</h3>
 
-gRPC Utilities and Enhancements
+
+
+<br />
+
+
+
++ [Packages](#packages)
++ [Codeophon](#codeophon)
 
 
 
@@ -24,3 +34,10 @@ gRPC Utilities and Enhancements
 [@plurid/enhanced-grpc][enhanced-grpc] • `NodeJS` package
 
 [enhanced-grpc]: https://github.com/plurid/enhanced-grpc/tree/master/packages/enhanced-grpc-node
+
+
+
+## [Codeophon](https://github.com/ly3xqhl8g9/codeophon)
+
++ licensing: [delicense](https://github.com/ly3xqhl8g9/delicense)
++ versioning: [αver](https://github.com/ly3xqhl8g9/alpha-versioning)
