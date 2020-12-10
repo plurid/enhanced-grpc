@@ -1,3 +1,4 @@
+// #region module
 export interface ClientOptions {
     protocolBuffers: string[];
     protocolBuffersDirectories: string[];
@@ -21,3 +22,4 @@ export interface SuccessfulClientCallResponse<R> {
 export type ClientCallResponse<R> =
     | FailedClientCallResponse
     | SuccessfulClientCallResponse<R>;
+// #endregion module

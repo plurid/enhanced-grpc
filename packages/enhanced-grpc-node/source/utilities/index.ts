@@ -1,13 +1,22 @@
-import grpc from 'grpc';
-import * as protoLoader from '@grpc/proto-loader';
+// #region imports
+    // #region libraries
+    import grpc from 'grpc';
 
-import {
-    ClientOptions,
-    ClientCallResponse,
-} from '../data/interfaces';
-
+    import * as protoLoader from '@grpc/proto-loader';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ClientOptions,
+        ClientCallResponse,
+    } from '~data/interfaces';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 export const generateClient = (
     options: ClientOptions,
 ) => {
@@ -122,3 +131,4 @@ export const tryClientCall = async <R, D>(
         };
     }
 }
+// #endregion module
