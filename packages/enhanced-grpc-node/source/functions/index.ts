@@ -88,6 +88,7 @@ export const clientCall = async <R, D>(
             ) => {
                 if (error) {
                     reject(error);
+                    return;
                 }
 
                 resolve(response);
