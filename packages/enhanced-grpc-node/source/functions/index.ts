@@ -82,7 +82,7 @@ export const generateClient = (
  * @param name
  * @param data
  */
-export const clientCall = async <R, D, C = any>(
+export const clientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
@@ -106,7 +106,7 @@ export const clientCall = async <R, D, C = any>(
                 resolve(response);
             }
 
-            (client as C)[name](data, callback);
+            (client as grpc.Client)[name](data, callback);
         }
     );
 
@@ -121,13 +121,13 @@ export const clientCall = async <R, D, C = any>(
  * @param name
  * @param data
  */
-export const tryClientCall = async <R, D, C = any>(
+export const tryClientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
 ): Promise<ClientCallResponse<R>> => {
     try {
-        const response = await clientCall<R, D, C>(
+        const response = await clientCall<R, D>(
             client,
             name,
             data,
