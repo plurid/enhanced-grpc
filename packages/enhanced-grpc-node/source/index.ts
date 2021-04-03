@@ -1,5 +1,5 @@
 // #region exports
 export * from './data/interfaces';
 
-export * from './utilities';
+export * from './functions';
 // #endregion exports

@@ -17,6 +17,11 @@
 
 
 // #region module
+/**
+ * Generate a client.
+ *
+ * @param options
+ */
 export const generateClient = (
     options: ClientOptions,
 ) => {
@@ -70,6 +75,13 @@ export const generateClient = (
 }
 
 
+/**
+ * Call the client.
+ *
+ * @param client
+ * @param name
+ * @param data
+ */
 export const clientCall = async <R, D, C = any>(
     client: grpc.Client | undefined,
     name: string,
