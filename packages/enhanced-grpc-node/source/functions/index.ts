@@ -81,12 +81,17 @@ export const generateClient = (
  * @param client
  * @param name
  * @param data
+ * @param timeout seconds
  */
 export const clientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
+    timeout = 10,
 ): Promise<R> => {
+    const start = Date.now();
+    let responded = false;
+
     const response = await new Promise<R>(
         (resolve, reject) => {
             if (!client) {
@@ -94,10 +99,34 @@ export const clientCall = async <R, D>(
                 return;
             }
 
+            const clientProcedure = client[name];
+            if (!clientProcedure) {
+                reject(`No gRPC procedure '${name}'`);
+                return;
+            }
+
+            const timeoutInterval = setInterval(
+                () => {
+                    if (responded) {
+                        clearInterval(timeoutInterval);
+                        return;
+                    }
+
+                    const now = Date.now();
+                    if (start + timeout * 1000 > now) {
+                        clearInterval(timeoutInterval);
+                        reject('gRPC client call timeout');
+                    }
+                },
+                1_000,
+            );
+
             const callback = (
                 error: any,
                 response: R,
             ) => {
+                responded = true;
+
                 if (error) {
                     reject(error);
                     return;
@@ -106,7 +135,7 @@ export const clientCall = async <R, D>(
                 resolve(response);
             }
 
-            (client as grpc.Client)[name](data, callback);
+            client[name](data, callback);
         }
     );
 
@@ -120,17 +149,20 @@ export const clientCall = async <R, D>(
  * @param client
  * @param name
  * @param data
+ * @param timeout seconds
  */
 export const tryClientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
+    timeout = 10,
 ): Promise<ClientCallResponse<R>> => {
     try {
         const response = await clientCall<R, D>(
             client,
             name,
             data,
+            timeout,
         );
 
         return {
