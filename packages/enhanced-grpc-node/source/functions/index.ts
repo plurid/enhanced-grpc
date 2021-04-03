@@ -11,6 +11,10 @@
         ClientOptions,
         ClientCallResponse,
     } from '~data/interfaces';
+
+    import {
+        CLIENT_CALL_TIMEOUT,
+    } from '~data/constants';
     // #endregion external
 // #endregion imports
 
@@ -87,7 +91,7 @@ export const clientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
-    timeout = 10,
+    timeout = CLIENT_CALL_TIMEOUT,
 ): Promise<R> => {
     const start = Date.now();
     let responded = false;
@@ -155,7 +159,7 @@ export const tryClientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
     data: D,
-    timeout = 10,
+    timeout = CLIENT_CALL_TIMEOUT,
 ): Promise<ClientCallResponse<R>> => {
     try {
         const response = await clientCall<R, D>(
