@@ -117,7 +117,7 @@ export const clientCall = async <R, D>(
                     }
 
                     const now = Date.now();
-                    if (start + timeout * 1000 > now) {
+                    if (start + timeout * 1000 < now) {
                         clearInterval(timeoutInterval);
                         reject('gRPC client call timeout');
                     }
