@@ -22,7 +22,7 @@
 
 // #region module
 /**
- * Generate a client.
+ * Generate a grpc client.
  *
  * @param options
  */
@@ -80,7 +80,7 @@ export const generateClient = (
 
 
 /**
- * Call the client.
+ * Call on the grpc `client` the `name`d function with the passed `data`.
  *
  * @param client
  * @param name
@@ -148,7 +148,7 @@ export const clientCall = async <R, D>(
 
 
 /**
- * Attempt to call on the `client` the `named` function with the passed `data`.
+ * Attempt to call on the grpc `client` the `name`d function with the passed `data`.
  *
  * @param client
  * @param name
