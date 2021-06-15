@@ -19,7 +19,7 @@ const globals = {
 const build =  {
     input: 'source/index.ts',
     external: [
-        'grpc',
+        '@grpc/grpc-js',
         '@grpc/proto-loader',
     ],
     output: [
