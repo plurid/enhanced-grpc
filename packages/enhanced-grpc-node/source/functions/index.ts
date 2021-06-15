@@ -1,6 +1,6 @@
 // #region imports
     // #region libraries
-    import grpc from 'grpc';
+    import grpc from '@grpc/grpc-js';
 
     import * as protoLoader from '@grpc/proto-loader';
     // #endregion libraries
