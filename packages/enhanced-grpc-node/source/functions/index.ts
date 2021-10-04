@@ -90,7 +90,7 @@ export const generateClient = (
 export const clientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
-    data: D,
+    data?: D,
     timeout = CLIENT_CALL_TIMEOUT,
 ): Promise<R> => {
     const start = Date.now();
@@ -158,7 +158,7 @@ export const clientCall = async <R, D>(
 export const tryClientCall = async <R, D>(
     client: grpc.Client | undefined,
     name: string,
-    data: D,
+    data?: D,
     timeout = CLIENT_CALL_TIMEOUT,
 ): Promise<ClientCallResponse<R>> => {
     try {
