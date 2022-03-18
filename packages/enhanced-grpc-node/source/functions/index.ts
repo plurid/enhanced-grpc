@@ -28,7 +28,7 @@
  */
 export const generateClient = (
     options: ClientOptions,
-) => {
+): grpc.Client | undefined => {
     const {
         protocolBuffers,
         protocolBuffersDirectories,
